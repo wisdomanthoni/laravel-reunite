@@ -23,7 +23,6 @@ class CreateFilmsTable extends Migration
             $table->enum('rating',[1,2,3,4,5]);
             $table->decimal('price');
             $table->integer('country_id');
-            $table->integer('genre');
             $table->string('photo');
             $table->timestamps();
         });

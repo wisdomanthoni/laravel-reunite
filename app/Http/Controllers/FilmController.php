@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\FilmRepository;
+
 
 class FilmController extends Controller
 {
+
+    public function __construct(FilmRepository $films)
+    {
+        $this->film = $films;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +42,32 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|min:11',
+            'address' => 'required',
+            'amount' => 'required',
+            'bank_account' => 'required',
+            'bank' => 'required',
+            'type' => 'required',
+        ]);
+
+        $customer = $this->user->adminAddCustomer($request->all());
+
+        if ($customer) {
+            $notification = array(
+                'message' => 'Film added Successful',
+                'alert-type' => 'success'
+            );
+            return back()->with($notification);
+        }
+            $notification = array(
+                'message' => 'Could Not Create Film',
+                'alert-type' => 'error'
+            );
+          return back()->with($notification);
+
     }
 
     /**
