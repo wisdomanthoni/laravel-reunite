@@ -84,6 +84,21 @@
         </main>
     </div>
     <script src="{{ asset('js/dropzone.js') }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script>
+      @if (session('status'))
+           window.toastr.info(" {{ session('status') }}");                
+       @endif
+       @if (session('warning'))
+            window.toastr.warning("{{ session('warning') }}");                    
+      @endif
+       @if (session('success'))
+            window.toastr.success("{{ session('success') }}");                    
+      @endif
+       @if (session('error'))
+            window.toastr.warning("{{ session('error') }}");                    
+      @endif
+    </script>
+    @yield('add_css')
 </body>
 </html>

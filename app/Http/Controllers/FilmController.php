@@ -118,4 +118,24 @@ class FilmController extends Controller
     {
         //
     }
+
+    public function uploadImage(Request $request){
+        $picUrl='';
+
+        // $this->validate($request, [
+        //      'pic' => 'file|image|mimes:jpeg,png,gif'
+        // ]);
+
+        dd($request->pic);
+
+        if ($request->pic) {
+           $pic = $request->file('pic');
+           $extension = $request->file('pic')->getClientOriginalExtension();
+           $filename  = 'film-photo-' . time() . '.' . $extension;
+           $picUrl = $pic->storeAs('public/photos', $filename);
+          // $picUrl = Cloudder::show(Cloudder::getPublicId(),["width"=>$width, "height"=> $height]);
+        }
+
+        return $picUrl;
+   }
 }
