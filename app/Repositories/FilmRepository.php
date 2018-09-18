@@ -21,7 +21,7 @@ class FilmRepository extends BaseRepository
 
    public function paginate()
    {
-       return $this->films->paginate(1);
+       return $this->films->simplePaginate(1);
    }
 
    public function getSlug($text)
@@ -46,14 +46,14 @@ class FilmRepository extends BaseRepository
 
         // Add Genre to a Film
         foreach($data['genre'] as $g){
-            if(!Role::where('name', $g )){
+            if(!Genre::where('name', $g )){
                 Genre::create([
                     'name' => $g
                 ]);
             }
            $film
           ->genres()
-          ->attach(Role::where('name', $g )->first()); 
+          ->attach(Genre::where('name', $g )->first()); 
         }
         
         if (!$film) {

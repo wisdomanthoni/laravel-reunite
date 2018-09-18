@@ -21,7 +21,12 @@ class FilmController extends Controller
      */
     public function index()
     {
-        //
+        return view('home');
+    }
+    
+    public function paginate()
+    {
+       return $this->films->paginate();
     }
 
     /**
@@ -31,7 +36,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        //
+        return view('films.create');
     }
 
     /**
