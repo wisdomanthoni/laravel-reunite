@@ -11,11 +11,13 @@ class CreateFilmsTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('films', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
+            $table->string('title');
             $table->text('description');
             $table->date('release_date');
             $table->enum('rating',[1,2,3,4,5]);
