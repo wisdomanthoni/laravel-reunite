@@ -43,30 +43,29 @@ class FilmController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|min:11',
-            'address' => 'required',
-            'amount' => 'required',
-            'bank_account' => 'required',
-            'bank' => 'required',
-            'type' => 'required',
+            'title' => 'required|string|max:255',
+            'descriptiom' => 'required|string',
+            'date' => 'required|min:11',
+            'rating' => 'required',
+            'price' => 'required',
+            'country' => 'required',
+            'photo' => 'required',
         ]);
 
-        $customer = $this->user->adminAddCustomer($request->all());
+        $film = $this->user->adminAddCustomer($request->all());
 
-        if ($customer) {
-            $notification = array(
+        if ($film) {
+            $response = array(
                 'message' => 'Film added Successful',
                 'alert-type' => 'success'
             );
             return back()->with($notification);
         }
-            $notification = array(
+            $response = array(
                 'message' => 'Could Not Create Film',
                 'alert-type' => 'error'
             );
-          return back()->with($notification);
+          return response()->json($response, $code);
 
     }
 
