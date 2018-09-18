@@ -49,7 +49,7 @@ class FilmController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|max:255',
-            'descriptiom' => 'required|string',
+            'description' => 'required|string',
             'date' => 'required|min:11',
             'rating' => 'required',
             'price' => 'required',
@@ -126,16 +126,16 @@ class FilmController extends Controller
         //      'pic' => 'file|image|mimes:jpeg,png,gif'
         // ]);
 
-        dd($request->pic);
+        //dd($request);
 
         if ($request->pic) {
            $pic = $request->file('pic');
            $extension = $request->file('pic')->getClientOriginalExtension();
            $filename  = 'film-photo-' . time() . '.' . $extension;
-           $picUrl = $pic->storeAs('public/photos', $filename);
+           $picUrl = $pic->storeAs('/public/photos', $filename, 'public');
           // $picUrl = Cloudder::show(Cloudder::getPublicId(),["width"=>$width, "height"=> $height]);
         }
 
-        return $picUrl;
+        return '/'.$picUrl;
    }
 }

@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -24,7 +24,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div id="apps">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -79,11 +79,11 @@
             </div>
         </nav>
 
+        <div id='app'></div>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script>
       @if (session('status'))
@@ -99,6 +99,6 @@
             window.toastr.warning("{{ session('error') }}");                    
       @endif
     </script>
-    @yield('add_css')
+    @yield('add_js')
 </body>
 </html>

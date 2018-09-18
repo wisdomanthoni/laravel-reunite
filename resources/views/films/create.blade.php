@@ -102,24 +102,24 @@
                             <option>5</option>
                             </select>
                         </div>
-
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+
+                     <button class="btn btn-primary submit" onclick="event.preventDefault(); submit(event); ">Submit</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
 @endsection
 
-@section('app-css')
+@section('add_js')
+<script src="{{ asset('js/dropzone.js') }}"></script>
 <script>
-   Dropzone.options.filmPicture = {
+   Dropzone.options.filmPicture= {
       paramName: "pic", // The name that will be used to transfer the file
       maxFilesize: 5, // MB
+      maxFiles: 1,
       withCredentials: true,
       addRemoveLinks: true,
       dictRemoveFile: 'Remove file',
@@ -128,11 +128,9 @@
       uploadMultiple: false,
       url: "/api/upload",
       success: function(file, response) {
-        $('#film-pic').attr("src",response)
+          $('#film-pic').attr("src",response)
                   $('#picurl').val(response);
-                  window.toastr.success("Film Picture Uploaded Successfully", "Success Alert", {
-                    timeOut: 3000
-                  });
+                  toastr.success("Film Picture Uploaded Successfully");
       },
       error: function(file, response) {
         window.toastr.error("Unable to upload film picture, please check your network and try again", "Upload Error", {
@@ -140,5 +138,54 @@
         });
       }
     };
+</script>
+
+<script>
+   function submit(event) {
+    let myId = event.target.id;
+    var button = $('.submit');
+    var isDisabled = true;
+    var isAble = false;
+    button.attr('disabled', isDisabled);
+
+    setTimeout(function () {
+        button.attr('disabled', !isDisabled);
+    }, 10000)
+    var val = [];
+    $('input, select, textarea').each(
+    function(index){  
+        var input = $(this);
+
+        // alert('Type: ' + input.attr('type') + 'Name: ' + input.attr('name') + 'Value: ' + input.val());
+     }
+   );
+
+//   axios
+//     .post("/api/films", {
+//        title : ,
+//        description :,
+//        date : ,
+//        rating : ,
+//        price : ,
+//        country : ,
+//        photo : ,
+//        genre : ,
+//     })
+//     .then(function(response) {
+//         window.toastr.success(response.data, "Success Alert", {
+//             timeOut: 3000
+//         });
+//         button.attr('disabled', isAble);
+       
+//     })
+//     .catch(function(error) {
+//       window.toastr.error(error.data, "Danger Alert", {
+//         timeOut: 3000
+//       });
+//      button.attr('disabled', isAble);
+//       console.log(error);
+//     });
+// }
+}
 </script>
 @endsection
