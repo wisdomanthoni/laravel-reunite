@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+                            <input type="text" class="form-control" name="title" placeholder="Enter title">
                         </div>
 
                         <div class="form-group">
@@ -151,41 +151,45 @@
     setTimeout(function () {
         button.attr('disabled', !isDisabled);
     }, 10000)
-    var val = [];
+    var arr = [];
     $('input, select, textarea').each(
     function(index){  
         var input = $(this);
-
+        var name = input.attr('name');
+        var val = input.val();
+        
+        arr[name] = val; //does not work
         // alert('Type: ' + input.attr('type') + 'Name: ' + input.attr('name') + 'Value: ' + input.val());
      }
    );
 
-//   axios
-//     .post("/api/films", {
-//        title : ,
-//        description :,
-//        date : ,
-//        rating : ,
-//        price : ,
-//        country : ,
-//        photo : ,
-//        genre : ,
-//     })
-//     .then(function(response) {
-//         window.toastr.success(response.data, "Success Alert", {
-//             timeOut: 3000
-//         });
-//         button.attr('disabled', isAble);
+   //console.log(arr);
+
+  axios
+    .post("/api/films", {
+       title : arr[title],
+       description : arr[description],
+       date : arr[date],
+       rating : arr[rating],
+       price : arr[price],
+       country : arr[country],
+       photo : arr[photo],
+       genre : arr[title],
+    })
+    .then(function(response) {
+        window.toastr.success(response.data, "Success Alert", {
+            timeOut: 3000
+        });
+        button.attr('disabled', isAble);
        
-//     })
-//     .catch(function(error) {
-//       window.toastr.error(error.data, "Danger Alert", {
-//         timeOut: 3000
-//       });
-//      button.attr('disabled', isAble);
-//       console.log(error);
-//     });
-// }
+    })
+    .catch(function(error) {
+      window.toastr.error(error.data, "Danger Alert", {
+        timeOut: 3000
+      });
+     button.attr('disabled', isAble);
+      console.log(error);
+    });
 }
 </script>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\FilmRepository;
+use App\Film; 
 
 
 class FilmController extends Controller
@@ -28,7 +29,7 @@ class FilmController extends Controller
     {
        return $this->films->paginate();
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -77,12 +78,17 @@ class FilmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+       $film = Film::where('slug',$slug);
+       $comments = $film->comments();
+       return view('film.single',[
+          'film' => $film,
+          'comments' => $comments
+       ]);
     }
 
     /**

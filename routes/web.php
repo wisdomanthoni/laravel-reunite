@@ -19,3 +19,4 @@ Auth::routes();
 
 Route::get('/films', 'FilmController@index')->name('home');
 Route::get('/film/create', 'FilmController@create')->name('film-create');
+Route::get('/film/{slug}', 'FilmController@show')->name('film-show');
