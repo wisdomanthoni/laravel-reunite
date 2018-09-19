@@ -26,26 +26,47 @@
                         </div>
                         <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 250px; height: 250px;" src="{{ url($film->photo) }}" data-holder-rendered="true">
                     </div>
-
-                    <form>
-                        <input type="hidden" name="user">
+                    
+                    @auth
+                    <form id="myform">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Write a Comment</label>
+                            <label for="comment">Write a Comment</label>
                             <textarea class="form-control" name="comment" rows="3"></textarea>
                         </div>
                     </form>
+                    <button class="btn btn-primary submit" onclick="event.preventDefault(); submit(event);" >Comment</button>
 
-                    <button class="btn btn-primary submit" onclick="event.preventDefault(); comment(event); ">Comment</button>
+                    @else
+
+                       <div class="media text-muted pt-3">
+                            <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                 Login or Register to comment on this Film
+                            </p>
+                        </div>
+                    
+                    @endauth
+
 
                     <div class="my-3 p-3 bg-white rounded shadow-sm">
                         <h6 class="border-bottom border-gray pb-2 mb-0">Comments</h6>
-                         <div class="media text-muted pt-3">
-                            <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
-                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                <strong class="d-block text-gray-dark">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                            </p>
-                         </div>
+                        @forelse($comments as $comment)
+                             <div class="media text-muted pt-3">
+                                <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">{{$comment->user->name}}</strong>
+                                    {{$comment->comment}}
+                                </p>
+                             </div>
+                        @empty
+                              <div class="media text-muted pt-3">
+                                    <img data-src="holder.js/32x32?theme=thumb&bg=007bff&fg=007bff&size=1" alt="" class="mr-2 rounded">
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                      No Comment on this Film
+                                    </p>
+                                </div>
+                        @endforelse
+                         
                            <!--         
                             <small class="d-block text-right mt-3">
                             <a href="#">All updates</a>
@@ -89,7 +110,7 @@
   axios
     .post("/api/comment", {
        user : {{Auth::id()}},
-       film : {{$film->id}}
+       film : {{$film->id}},
        comment : arr['comment'],
     })
     .then(function(response) {
@@ -103,17 +124,6 @@
     })
     .catch(function(error) {
         var err = error.response.data.errors
-        // console.log(err)
-        //     for (val of err) {
-        //        console.log(val);
-        //      }
-
-        // // err.forEach( function (data) {
-        // //      window.toastr.error(data, {
-        // //         timeOut: 3000
-        // //     });
-        // // });
-        
       window.toastr.error(error.data, "Danger Alert", {
         timeOut: 3000
       });

@@ -96,10 +96,12 @@ class FilmController extends Controller
     {
        $film = Film::where('slug',$slug)->first();
        //dd($film);
-       $comments = $film->comments();
+       //$comments = $film->comments;
+       $comments = Comment::where('film_id', $film->id)->latest()->get();
+       //dd($comments);
        return view('films.single',[
           'film' => $film,
-        //   'comments' => $comments
+          'comments' => $comments
        ]);
     }
 
@@ -156,7 +158,7 @@ class FilmController extends Controller
         return '/'.$picUrl;
    }
 
-   public function comment()
+   public function comment(Request $request)
    {
         $this->validate($request, [
             'comment' => 'required|string|max:255',
@@ -164,7 +166,7 @@ class FilmController extends Controller
 
         $comment = Comment::create([
             'user_id' => $request->user,
-            'film' => $request->film,
+            'film_id' => $request->film,
             'comment' => $request->comment,
         ]);
    }
