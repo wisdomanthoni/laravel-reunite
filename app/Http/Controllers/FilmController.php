@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\FilmRepository;
 use App\Film; 
 use App\Country;
+use App\Comment;
 use Auth;
 
 class FilmController extends Controller
@@ -95,7 +96,7 @@ class FilmController extends Controller
     {
        $film = Film::where('slug',$slug)->first();
        //dd($film);
-       //$comments = $film->comments();
+       $comments = $film->comments();
        return view('films.single',[
           'film' => $film,
         //   'comments' => $comments
@@ -150,7 +151,6 @@ class FilmController extends Controller
            $extension = $request->file('pic')->getClientOriginalExtension();
            $filename  = 'film-photo-' . time() . '.' . $extension;
            $picUrl = $pic->storeAs('/public/photos', $filename, 'public');
-          // $picUrl = Cloudder::show(Cloudder::getPublicId(),["width"=>$width, "height"=> $height]);
         }
 
         return '/'.$picUrl;
@@ -158,6 +158,14 @@ class FilmController extends Controller
 
    public function comment()
    {
-       
+        $this->validate($request, [
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $comment = Comment::create([
+            'user_id' => $request->user,
+            'film' => $request->film,
+            'comment' => $request->comment,
+        ]);
    }
 }

@@ -87,23 +87,16 @@
    console.log(arr);
 
   axios
-    .post("/api/films", {
+    .post("/api/comment", {
        user : {{Auth::id()}},
-       title : arr['title'],
-       description : arr['description'],
-       date : arr['date'],
-       rating : arr['rating'],
-       price : arr['price'],
-       country : arr['country'],
-       photo : arr['photo'],
-       genres : arr['genres'],
+       film : {{$film->id}}
+       comment : arr['comment'],
     })
     .then(function(response) {
         //console.log(esponse.data)
-        window.toastr.success("Film Added Succesfully", {
+        window.toastr.success("Comment Added Succesfully", {
             timeOut: 3000
         });
-        $("#filmPicture")[0].reset();
         $("#myform")[0].reset();
         button.attr('disabled', isAble);
         location.reload();       

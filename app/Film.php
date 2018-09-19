@@ -18,6 +18,11 @@ class Film extends Model
       return $this->belongsToMany(Genre::class);
     }
 
+    public function comments()
+    {
+      return $this->hasMany(Comment::class);
+    }
+
     public function country()
     {
       return $this->belongsTo(Country::class);
