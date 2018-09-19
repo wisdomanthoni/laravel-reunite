@@ -22,7 +22,28 @@
                         </h3>
                         <div class="mb-1 text-muted">{{$film->date}}</div>
                         <p class="card-text mb-auto">{{$film->description}}</p>
-                        <!-- <a href="#">Go Back</a> -->
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Release Date: {{$film->release_date}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Price: {{$film->price}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#"> Rating <span class="badge badge-light">{{$film->rating}}</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#">Genre:
+                                    @forelse($film->genres as $genre)
+                                      {{$genre->name}},
+                                    @empty
+                                      This Film has no Genre
+                                    @endforelse
+                                </a>
+                            </li>
+                          </ul>
+
+                        <a href="{{ url()->previous() }}">Go Back</a>
                         </div>
                         <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" style="width: 250px; height: 250px;" src="{{ url($film->photo) }}" data-holder-rendered="true">
                     </div>
