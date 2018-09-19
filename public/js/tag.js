@@ -106,11 +106,15 @@
                 itemTitle = self.options.itemTitle(item);
 
             // Ignore items allready added
-            var existing = $.grep(self.itemsArray, function (item) { return self.options.itemValue(item) === itemValue; })[0];
+            var existing = $.grep(self.itemsArray, function (item) {
+                return self.options.itemValue(item) === itemValue;
+            })[0];
             if (existing && !self.options.allowDuplicates) {
                 // Invoke onTagExists
                 if (self.options.onTagExists) {
-                    var $existingTag = $(".tag", self.$container).filter(function () { return $(this).data("item") === existing; });
+                    var $existingTag = $(".tag", self.$container).filter(function () {
+                        return $(this).data("item") === existing;
+                    });
                     self.options.onTagExists(item, $existingTag);
                 }
                 return;
@@ -121,7 +125,11 @@
                 return;
 
             // raise beforeItemAdd arg
-            var beforeItemAddEvent = $.Event('beforeItemAdd', { item: item, cancel: false, options: options });
+            var beforeItemAddEvent = $.Event('beforeItemAdd', {
+                item: item,
+                cancel: false,
+                options: options
+            });
             self.$element.trigger(beforeItemAddEvent);
             if (beforeItemAddEvent.cancel)
                 return;
@@ -151,7 +159,10 @@
             if (self.options.maxTags === self.itemsArray.length || self.items().toString().length === self.options.maxInputLength)
                 self.$container.addClass('bootstrap-tagsinput-max');
 
-            self.$element.trigger($.Event('itemAdded', { item: item, options: options }));
+            self.$element.trigger($.Event('itemAdded', {
+                item: item,
+                options: options
+            }));
         },
 
         /**
@@ -163,21 +174,33 @@
 
             if (self.objectItems) {
                 if (typeof item === "object")
-                    item = $.grep(self.itemsArray, function (other) { return self.options.itemValue(other) == self.options.itemValue(item); });
+                    item = $.grep(self.itemsArray, function (other) {
+                        return self.options.itemValue(other) == self.options.itemValue(item);
+                    });
                 else
-                    item = $.grep(self.itemsArray, function (other) { return self.options.itemValue(other) == item; });
+                    item = $.grep(self.itemsArray, function (other) {
+                        return self.options.itemValue(other) == item;
+                    });
 
                 item = item[item.length - 1];
             }
 
             if (item) {
-                var beforeItemRemoveEvent = $.Event('beforeItemRemove', { item: item, cancel: false, options: options });
+                var beforeItemRemoveEvent = $.Event('beforeItemRemove', {
+                    item: item,
+                    cancel: false,
+                    options: options
+                });
                 self.$element.trigger(beforeItemRemoveEvent);
                 if (beforeItemRemoveEvent.cancel)
                     return;
 
-                $('.tag', self.$container).filter(function () { return $(this).data('item') === item; }).remove();
-                $('option', self.$element).filter(function () { return $(this).data('item') === item; }).remove();
+                $('.tag', self.$container).filter(function () {
+                    return $(this).data('item') === item;
+                }).remove();
+                $('option', self.$element).filter(function () {
+                    return $(this).data('item') === item;
+                }).remove();
                 if ($.inArray(item, self.itemsArray) !== -1)
                     self.itemsArray.splice($.inArray(item, self.itemsArray), 1);
             }
@@ -189,7 +212,10 @@
             if (self.options.maxTags > self.itemsArray.length)
                 self.$container.removeClass('bootstrap-tagsinput-max');
 
-            self.$element.trigger($.Event('itemRemoved', { item: item, options: options }));
+            self.$element.trigger($.Event('itemRemoved', {
+                item: item,
+                options: options
+            }));
         },
 
         /**
@@ -228,7 +254,9 @@
                 })[0].nodeValue = htmlEncode(itemText);
 
                 if (self.isSelect) {
-                    var option = $('option', self.$element).filter(function () { return $(this).data('item') === item; });
+                    var option = $('option', self.$element).filter(function () {
+                        return $(this).data('item') === item;
+                    });
                     option.attr('value', itemValue);
                 }
             });
@@ -383,7 +411,7 @@
                         }
                         break;
 
-                    // DELETE
+                        // DELETE
                     case 46:
                         if (doGetCaretPosition($input[0]) === 0) {
                             var next = $inputWrapper.next();
@@ -393,7 +421,7 @@
                         }
                         break;
 
-                    // LEFT ARROW
+                        // LEFT ARROW
                     case 37:
                         // Try to move the input before the previous tag
                         var $prevTag = $inputWrapper.prev();
@@ -402,7 +430,7 @@
                             $input.focus();
                         }
                         break;
-                    // RIGHT ARROW
+                        // RIGHT ARROW
                     case 39:
                         // Try to move the input after the next tag
                         var $nextTag = $inputWrapper.next();
@@ -412,7 +440,7 @@
                         }
                         break;
                     default:
-                    // ignore
+                        // ignore
                 }
 
                 // Reset internal input's size
@@ -569,19 +597,25 @@
     function makeOptionItemFunction(options, key) {
         if (typeof options[key] !== 'function') {
             var propertyName = options[key];
-            options[key] = function (item) { return item[propertyName]; };
+            options[key] = function (item) {
+                return item[propertyName];
+            };
         }
     }
+
     function makeOptionFunction(options, key) {
         if (typeof options[key] !== 'function') {
             var value = options[key];
-            options[key] = function () { return value; };
+            options[key] = function () {
+                return value;
+            };
         }
     }
     /**
      * HtmlEncodes the given value
      */
     var htmlEncodeContainer = $('<div />');
+
     function htmlEncode(value) {
         if (value) {
             return htmlEncodeContainer.text(value).html();
@@ -608,12 +642,12 @@
     }
 
     /**
-      * Returns boolean indicates whether user has pressed an expected key combination.
-      * @param object keyPressEvent: JavaScript event object, refer
-      *     http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
-      * @param object lookupList: expected key combinations, as in:
-      *     [13, {which: 188, shiftKey: true}]
-      */
+     * Returns boolean indicates whether user has pressed an expected key combination.
+     * @param object keyPressEvent: JavaScript event object, refer
+     *     http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
+     * @param object lookupList: expected key combinations, as in:
+     *     [13, {which: 188, shiftKey: true}]
+     */
     function keyCombinationInList(keyPressEvent, lookupList) {
         var found = false;
         $.each(lookupList, function (index, keyCombination) {

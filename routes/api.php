@@ -21,3 +21,4 @@ Route::post('/films', 'FilmController@store');
 Route::post('/films/{id}', 'FilmController@update');
 Route::post('/films/comment/{id}','FilmController@comment');
 Route::post('/upload','FilmController@uploadImage');
+Route::post('/comment','FilmController@comment');

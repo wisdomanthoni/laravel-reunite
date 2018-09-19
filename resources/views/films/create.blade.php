@@ -43,7 +43,7 @@
                      </div>
                    </div>
 
-                    <form>
+                    <form id="myform">
                         <input type="hidden" name="photo" id="picurl" value="">
 
                         <div class="form-group">
@@ -92,14 +92,21 @@
                         
                         <br>
 
+
+                        <div class="form-group">
+                            <label for="genres">Genres</label>  <br>
+                            <select multiple data-role="tagsinput" name="genres" class="form-control">
+                                
+                            </select>
+                            <!-- <input type="text" class="form-control" data-role="tagsinput" name="title" placeholder="Enter Genres"> -->
+                        </div>
+
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Country</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <select class="form-control" id="exampleFormControlSelect1" name="country">
+                             @foreach($countries as $c)
+                               <option value="{{$c->id}}">{{$c->name}}</option>
+                             @endforeach
                             </select>
                         </div>
                     </form>
@@ -114,7 +121,17 @@
 @endsection
 
 @section('add_js')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="{{ asset('js/tag.js') }}" defer></script>
 <script src="{{ asset('js/dropzone.js') }}"></script>
+<script>
+
+    $( document ).ready(function() {
+          $(".bootstrap-tagsinput > input").addClass("form-control");
+   });
+
+</script>
 <script>
    Dropzone.options.filmPicture= {
       paramName: "pic", // The name that will be used to transfer the file
@@ -163,33 +180,49 @@
      }
    );
 
-   //console.log(arr);
+   console.log(arr);
 
   axios
     .post("/api/films", {
-       title : arr[title],
-       description : arr[description],
-       date : arr[date],
-       rating : arr[rating],
-       price : arr[price],
-       country : arr[country],
-       photo : arr[photo],
-       genre : arr[title],
+       user : {{Auth::id()}},
+       title : arr['title'],
+       description : arr['description'],
+       date : arr['date'],
+       rating : arr['rating'],
+       price : arr['price'],
+       country : arr['country'],
+       photo : arr['photo'],
+       genres : arr['genres'],
     })
     .then(function(response) {
-        window.toastr.success(response.data, "Success Alert", {
+        //console.log(esponse.data)
+        window.toastr.success("Film Added Succesfully", {
             timeOut: 3000
         });
+        $("#filmPicture")[0].reset();
+        $("#myform")[0].reset();
         button.attr('disabled', isAble);
-       
+        location.reload();       
     })
     .catch(function(error) {
+        var err = error.response.data.errors
+        // console.log(err)
+        //     for (val of err) {
+        //        console.log(val);
+        //      }
+
+        // // err.forEach( function (data) {
+        // //      window.toastr.error(data, {
+        // //         timeOut: 3000
+        // //     });
+        // // });
+        
       window.toastr.error(error.data, "Danger Alert", {
         timeOut: 3000
       });
-     button.attr('disabled', isAble);
-      console.log(error);
-    });
+      button.attr('disabled', isAble);
+    //   console.log(error.response);
+  });
 }
 </script>
 @endsection

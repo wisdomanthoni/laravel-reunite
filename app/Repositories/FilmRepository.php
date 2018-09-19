@@ -3,6 +3,8 @@ namespace App\Repositories;
 
 use App\Film;
 use App\Genre;
+use DB;
+use Auth;
 
 class FilmRepository extends BaseRepository
 {
@@ -29,23 +31,26 @@ class FilmRepository extends BaseRepository
        return $this->slugIt($text);
    }
 
-   public function createFilm($data, $session = null)
+   public function addFilm($data, $session = null)
    {
        //dd($data);
        DB::beginTransaction();
+
        
-       $film = Customer::create([
-           'title' => ucfirst($data['name']),
-           'description' => $data['email'],
+       $film = Film::create([
+           'user_id' => $data['user'],
+           'title' => ucfirst($data['title']),
+           'description' => $data['description'],
            'release_date'  => $data['date'],
            'rating' => $data['rating'],
-           'pricing'   => $data['pricing'],
+           'price'   => $data['price'],
            'country_id' => $data['country'],
            'photo' => $data['photo'],
+           'slug' => $this->getSlug(ucfirst($data['title']))
        ]);
 
         // Add Genre to a Film
-        foreach($data['genre'] as $g){
+        foreach($data['genres'] as $g){
             if(!Genre::where('name', $g )){
                 Genre::create([
                     'name' => $g

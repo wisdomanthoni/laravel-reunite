@@ -24,6 +24,7 @@ class CreateFilmsTable extends Migration
             $table->decimal('price');
             $table->integer('country_id');
             $table->string('photo');
+            $table->string('slug');
             $table->timestamps();
         });
     }

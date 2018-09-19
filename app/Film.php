@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Film extends Model
 {
-    protected $fillable = ['user_id', 'title', 'description', 'release_date', 'rating', 'pricing', 'country_id', 'photo'];
+    protected $fillable = ['user_id', 'title', 'description', 'release_date', 'rating', 'price', 'country_id', 'photo', 'slug',];
     
     public function user()
     {
@@ -15,6 +15,11 @@ class Film extends Model
 
     public function genres()
     {
-      return $this->hasMany(Genre::class);
+      return $this->belongsToMany(Genre::class);
+    }
+
+    public function country()
+    {
+      return $this->belongsTo(Country::class);
     }
 }

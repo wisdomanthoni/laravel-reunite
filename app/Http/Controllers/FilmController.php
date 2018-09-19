@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\FilmRepository;
 use App\Film; 
-
+use App\Country;
+use Auth;
 
 class FilmController extends Controller
 {
@@ -22,12 +23,16 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $films = $this->paginate();
+        //dd($films);
+        return view('home',[
+            'films' => $films,
+        ]);
     }
     
     public function paginate()
     {
-       return $this->films->paginate();
+       return $this->film->paginate();
     }
     
     /**
@@ -37,7 +42,10 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('films.create');
+        $countries = Country::all();
+        return view('films.create',[
+            'countries' => $countries
+        ]);
     }
 
     /**
@@ -48,24 +56,26 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(Auth::id());
+
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|min:11',
+            'date' => 'required',
             'rating' => 'required',
             'price' => 'required',
             'country' => 'required',
             'photo' => 'required',
         ]);
 
-        $film = $this->user->adminAddCustomer($request->all());
+        $film = $this->film->addFilm($request->all());
 
         if ($film) {
             $response = array(
                 'message' => 'Film added Successful',
                 'alert-type' => 'success'
             );
-            return back()->with($notification);
+            return back()->with($response);
         }
             $response = array(
                 'message' => 'Could Not Create Film',
@@ -83,11 +93,12 @@ class FilmController extends Controller
      */
     public function show($slug)
     {
-       $film = Film::where('slug',$slug);
-       $comments = $film->comments();
-       return view('film.single',[
+       $film = Film::where('slug',$slug)->first();
+       //dd($film);
+       //$comments = $film->comments();
+       return view('films.single',[
           'film' => $film,
-          'comments' => $comments
+        //   'comments' => $comments
        ]);
     }
 
@@ -143,5 +154,10 @@ class FilmController extends Controller
         }
 
         return '/'.$picUrl;
+   }
+
+   public function comment()
+   {
+       
    }
 }
