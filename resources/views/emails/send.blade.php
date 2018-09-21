@@ -14,7 +14,7 @@
         }
     </style>
     <div style="padding: 43px 53px; background-color: white; width:632px;">
-        <img src="https://res.cloudinary.com/djz6ymuuy/image/upload/v1537203720/logo.svg" alt="" style="width:115px; height: 115px;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.svg?alt=media&token=4c82938d-d846-4f84-b6e2-fa281ff0436f" alt="" style="width:115px; height: 115px;">
         <h2 style="line-height:29px; font-size: 25px; ">
             Dear {{$firstname}}
         </h1>
