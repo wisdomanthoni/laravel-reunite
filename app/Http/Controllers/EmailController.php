@@ -25,7 +25,7 @@ class EmailController extends Controller
 
             $message->from('noreply@devfest.tech', 'DevFest South South Organisers');
 
-            $message->to($email);
+            $message->to($email)->subject('DevFest South South 2018');
 
         });
 
