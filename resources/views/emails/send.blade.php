@@ -19,7 +19,7 @@
         <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.png?alt=media&token=b4b5bf23-cd8e-418a-b90d-8461355f9e37" alt="" style="width:115px; height: 115px;">
         <h2 style="line-height:29px; font-size: 18px; color: black !important;">
             Dear {{$firstname}}
-        </h1>
+        </h2>
         <p style="max-width: 418px; line-height:23px; font-size: 12px; color: #000;">
             This your ticket confirmation for GDG Devfest
             South-South Nigeria 2018
