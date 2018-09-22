@@ -15,13 +15,14 @@ class CreateParticipantsTable extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email');
-            $table->string('plan');
-            $table->string('ref');
-            $table->string('photo');
-            $table->decimal('amount');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('plan')->nullable();
+            $table->string('ref')->nullable();
+            $table->string('photo')->nullable();
+            $table->decimal('amount')->nullable();
+            $table->string('username')->nullable();
             $table->timestamps();
         });
     }

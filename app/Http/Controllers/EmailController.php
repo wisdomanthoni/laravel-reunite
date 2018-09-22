@@ -24,6 +24,7 @@ class EmailController extends Controller
         $p->ref = $id;
         $p->amount = $request->amount;
         $p->photo = $request->photo;
+        $p->username = $request->username;
         $p->save();
         
         Mail::send('emails.send', [ 
