@@ -16,7 +16,7 @@
         }
     </style>
     <div style="padding: 43px 53px; background-color: white; width:632px; margin:auto">
-        <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.png?alt=media&token=b4b5bf23-cd8e-418a-b90d-8461355f9e37" alt="" style="width:115px; height: 115px;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.png?alt=media&token=eacc5722-a83e-434c-b1d1-929ed9df6c87" alt="" style="width:115px; height: 115px;">
         <h2 style="line-height:29px; font-size: 18px; color: black !important;">
             Dear {{$firstname}}
         </h2>
@@ -31,7 +31,7 @@
             1 x {{$type}}
         </p>
 
-        <div style="background-color: #F5F5F5; padding: 31px 39px;">
+        <div style="background-color: #F5F5F5; padding: 35px 35px;">
             <h4 style="font-size: 12px;">
                 Order Information
             </h4>
