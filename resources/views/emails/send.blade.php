@@ -31,7 +31,7 @@
             1 x {{$type}}
         </p>
 
-        <div style="background-color: #F5F5F5; padding: 35px 35px;">
+        <div style="background-color: #F5F5F5; padding: 35px 35px; margin:auto;">
             <h4 style="font-size: 12px;">
                 Order Information
             </h4>
