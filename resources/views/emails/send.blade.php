@@ -16,7 +16,7 @@
         }
     </style>
     <div style="padding: 43px 53px; background-color: white; width:632px; margin:auto">
-        <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.png?alt=media&token=eacc5722-a83e-434c-b1d1-929ed9df6c87" alt="" style="width:115px; height: 115px;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/trend-76131.appspot.com/o/images%2Flogo.png?alt=media&token=f117f29b-1b56-4f6a-abd6-3deb0e4d7b64" alt="" style="width:115px; height: 115px;">
         <h2 style="line-height:29px; font-size: 18px; color: black !important;">
             Dear {{$firstname}}
         </h2>
@@ -36,7 +36,7 @@
                 Order Information
             </h4>
             <p style="line-height:23px; font-size: 12px;">Order Id: {{$id}}</p>
-            <table style="width:500px;"  cellspacing="0">
+            <table style="width:500px;" cellspacing="0">
                 <tbody>
                     <tr>
                         <th style="text-align:left; border-bottom: solid #52555A 1px" >Type:</th>
