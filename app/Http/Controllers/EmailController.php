@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
+use App\Participant;
 
 class EmailController extends Controller
 {
@@ -14,6 +15,16 @@ class EmailController extends Controller
         $id = $request->id;
         $type = $request->type;
         $email = $request->email;
+
+        $p = new Participant();
+        $p->firstname = $request->firstname;
+        $p->lastname = $request->lastname;
+        $p->email = $email;
+        $p->plan = $type;
+        $p->ref = $id;
+        $p->amount = $request->amount;
+        $p->photo = $request->photo;
+        $p->save();
         
         Mail::send('emails.send', [ 
                                    'type' => $type, 
