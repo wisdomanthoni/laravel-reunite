@@ -17,7 +17,7 @@ class CreateParticipantsTable extends Migration
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->email('email');
+            $table->string('email');
             $table->string('plan');
             $table->string('ref');
             $table->string('photo');
