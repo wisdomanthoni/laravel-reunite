@@ -57,12 +57,12 @@
         <!-- <button style="background-color: #F76F67; border: none; line-height: 29px; font-weight: bold; font-size:25px; color: white; width:100%; height:57px;">
             CANCEL TICKET
         </button> -->
-        <center>
+        <!-- <center>
             <p style="width:430px; color: #1481C5; font-size: 10px">Note: The deadline to request refunds is November 1st, 2018.
                 After this date,
                 all sales are final.
             </p>
-        </center>
+        </center> -->
         <div style="margin-bottom: -20px; color: #000;">
             <p style="font-size: 12px">Best Regards</p>
             <h3 style="line-height:23px; font-size: 18px;">GDG Uyo Team</h3>
