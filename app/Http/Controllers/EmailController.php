@@ -23,7 +23,7 @@ class EmailController extends Controller
                                    'lastname' => $request->lastname
                 ], function ($message) use($email) {
 
-            $message->from('noreply@devfest.tech', 'DevFest South South Organisers');
+            $message->from('noreply@devfest.tech', 'DevFest South South Team');
 
             $message->to($email)->subject('DevFest South South 2018');
 
