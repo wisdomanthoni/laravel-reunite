@@ -24,4 +24,4 @@ Route::post('/upload','FilmController@uploadImage');
 Route::post('/comment','FilmController@comment');
 
 Route::middleware('cors')->get('/sendmail', 'EmailController@send');
-Route::get('attendees','EmailController@show');
+Route::middleware('cors')->get('/attendees','EmailController@show');
