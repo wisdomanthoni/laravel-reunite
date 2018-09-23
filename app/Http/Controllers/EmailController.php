@@ -10,7 +10,7 @@ class EmailController extends Controller
 {
 
     public function show(){
-        return Participant::paginate();
+        return Participant::all();
     }
     public function send(Request $request)
     {
