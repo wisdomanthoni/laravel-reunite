@@ -65,7 +65,7 @@
         </center> -->
         <div style="margin-bottom: -20px; color: #000;">
             <p style="font-size: 12px">Best Regards</p>
-            <h3 style="line-height:23px; font-size: 18px;">Devfest South-South Team</h3>
+            <h3 style="line-height:23px; font-size: 12px;">Devfest South-South Team</h3>
         </div>
     </div>
     
