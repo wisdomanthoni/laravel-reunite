@@ -8,6 +8,10 @@ use App\Participant;
 
 class EmailController extends Controller
 {
+
+    public function show(){
+        return Participant::paginate();
+    }
     public function send(Request $request)
     {
         // return $request;
