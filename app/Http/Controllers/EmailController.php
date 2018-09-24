@@ -22,11 +22,6 @@ class EmailController extends Controller
         $type = $request->type;
         $email = $request->email;
         
-        if(isset($request->coupon)){
-            $c = Coupon::find($request->coupon);
-            $c->delete();
-        }
-        
         $p = new Participant();
         $p->firstname = $request->firstname;
         $p->lastname = $request->lastname;
@@ -37,6 +32,11 @@ class EmailController extends Controller
         $p->photo = $request->photo;
         $p->username = $request->username;
         $p->save();
+
+        if (isset($request->coupon)) {
+            $c = Coupon::find($request->coupon);
+            $c->user_id = $p->id;
+        }
         
         Mail::send('emails.send', [ 
                                    'type' => $type, 
