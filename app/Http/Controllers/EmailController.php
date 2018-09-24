@@ -63,7 +63,7 @@ class EmailController extends Controller
        if($coupon){
          return $coupon->id;
        }
-        return 500;
+        return response(null,500);
     }
 
     public function showCoupon(){
