@@ -33,8 +33,8 @@ class EmailController extends Controller
         $p->username = $request->username;
         $p->save();
         if (isset($request->coupon)) {
-            $c = Coupon::find($request->coupon)->first();
-            dd([$p,$c]);
+            $c = Coupon::find($request->coupon);
+           // dd([$p,$c]);
             $c->participant_id = $p->id;
             $c->save();
         }
