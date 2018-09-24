@@ -60,7 +60,7 @@ class EmailController extends Controller
 
     public function coupon(Request $request)
     {
-       $coupon = Coupon::where('coupon',$request->code)->whereNot()->first();
+       $coupon = Coupon::where('coupon',$request->code)->where('participant_id', null)->first();
        if($coupon){
             return $coupon->id;
        }
