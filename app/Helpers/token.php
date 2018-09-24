@@ -27,9 +27,15 @@ class Token {
     // $code = new Token; 
     // return $code->limit(6); // Will return something like 53ef6b
     
-    public function __construct($prefix = '', $entropy = false)
+    public function __construct($length = 15, $entropy = false)
     {
-        $this->uuid = uniqid($prefix, $entropy);
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        $this->uuid = $randomString;
     }
 
     /**
