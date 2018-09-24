@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td style="text-align:left; padding-top:10px">{{$type}}</td>
-                        <td style="text-align:right; padding-top:10px">N{{$amount}}</td>
+                        <td style="text-align:right; padding-top:10px"> ₦{{$amount}}</td>
                     </tr>
                 </tbody>
             </table>
