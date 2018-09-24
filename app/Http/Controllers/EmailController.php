@@ -68,6 +68,6 @@ class EmailController extends Controller
     }
 
     public function showCoupon(){
-        return Coupon::all()->paginate(20);
+        return Coupon::paginate();
     }
 }
