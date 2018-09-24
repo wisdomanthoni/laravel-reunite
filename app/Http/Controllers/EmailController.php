@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Participant;
+use App\Coupon;
 
 class EmailController extends Controller
 {
@@ -12,6 +13,7 @@ class EmailController extends Controller
     public function show(){
         return Participant::all();
     }
+
     public function send(Request $request)
     {
         // return $request;
@@ -19,7 +21,12 @@ class EmailController extends Controller
         $id = $request->id;
         $type = $request->type;
         $email = $request->email;
-
+        
+        if(isset($request->coupon)){
+            $c = Coupon::find($request->coupon);
+            $c->delete();
+        }
+        
         $p = new Participant();
         $p->firstname = $request->firstname;
         $p->lastname = $request->lastname;
@@ -48,5 +55,11 @@ class EmailController extends Controller
 
         return response()->json(['status' => 'success']);
             
+    }
+
+    public function coupon(Request $request)
+    {
+       $coupon = Coupon::where('coupon',$request->code)->first();
+       return $coupon->id;
     }
 }
