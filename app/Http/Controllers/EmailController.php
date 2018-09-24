@@ -36,6 +36,7 @@ class EmailController extends Controller
         if (isset($request->coupon)) {
             $c = Coupon::find($request->coupon);
             $c->user_id = $p->id;
+            $c->save();
         }
         
         Mail::send('emails.send', [ 
@@ -59,7 +60,10 @@ class EmailController extends Controller
 
     public function coupon(Request $request)
     {
-       $coupon = Coupon::where('coupon',$request->code)->first();
-       return $coupon->id;
+       $coupon = Coupon::where('coupon',$request->code)->whereNot()->first();
+       if($coupon){
+            return $coupon->id;
+       }
+        return false;
     }
 }
