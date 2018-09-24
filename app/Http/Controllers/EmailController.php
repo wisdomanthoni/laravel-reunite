@@ -61,8 +61,9 @@ class EmailController extends Controller
     {
        $coupon = Coupon::where('coupon',$request->code)->where('participant_id', null)->first();
        if($coupon){
-            return $coupon->id;
+         return $coupon->id;
        }
+        return 500;
     }
 
     public function showCoupon(){
