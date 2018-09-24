@@ -31,13 +31,12 @@ class EmailController extends Controller
         $p->amount = $request->amount;
         $p->photo = $request->photo;
         $p->username = $request->username;
-        $p->save();
         if (isset($request->coupon)) {
             $c = Coupon::find($request->coupon);
-           // dd([$p,$c]);
             $c->participant_id = $p->id;
             $c->save();
         }
+        $p->save();
         
         Mail::send('emails.send', [ 
                                    'type' => $type, 
