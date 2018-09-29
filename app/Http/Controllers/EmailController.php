@@ -33,7 +33,7 @@ class EmailController extends Controller
         $p->username = $request->username;
         $p->save();
 
-        if (!empty($request->coupon) && $request->coupon != null) {
+        if (!empty($request->coupon)) {
             $c = Coupon::find($request->coupon);
             $c->participant_id = $p->id;
             $c->save();
