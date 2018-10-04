@@ -13,13 +13,19 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <ul>
-                        @foreach($coupons as $coupon)
-                          <li>
-                              {{ $coupon->coupon }}
-                         </li>
-                        @endforeach
-                    </ul>
+                    <div class="row"> 
+                        @foreach($coupons->chunk(25) as $cops)
+                         <div class="col-3"> 
+                             <ul>
+                                @foreach($cops as $coupon)
+                                    <li>
+                                        {{ $coupon->coupon }}
+                                    </li>
+                                @endforeach
+                             </ul>
+                         </div>
+                        @endforeach                    
+                    </div>
                     
                     {{ $coupons->links() }}
 
