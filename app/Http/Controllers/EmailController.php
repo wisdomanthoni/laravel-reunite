@@ -68,7 +68,7 @@ class EmailController extends Controller
     }
 
     public function showCoupon(){
-        $coupons = Coupon::where('coupon', $request->code)->where('participant_id', null)->paginate(100);
+        $coupons = Coupon::where('participant_id', null)->paginate(100);
 
         return view('coupon',[
             'coupons' => $coupons
