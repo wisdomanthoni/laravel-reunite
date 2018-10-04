@@ -13,13 +13,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <table>
+                    <ul>
                         @foreach($coupons as $coupon)
-                          <tr>
+                          <li>
                               {{ $coupon->coupon }}
-                          </tr>
+                         </li>
                         @endforeach
-                    </table>
+                    </ul>
                     
                     {{ $coupons->links() }}
 
