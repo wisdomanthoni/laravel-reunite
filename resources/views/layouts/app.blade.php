@@ -26,9 +26,9 @@
 </head>
 <body>
     <div id="apps">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background: #393ba3; color:white !important;>
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand tex-white" style="color:white !important" href="{{ url('/') }}">
                     {{ config('app.name', 'DevFestSS Panel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
