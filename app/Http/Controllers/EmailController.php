@@ -37,6 +37,7 @@ class EmailController extends Controller
             $c = Coupon::find($request->coupon);
             $c->participant_id = $p->id;
             $c->save();
+            $type = $c->type;
         }
         
         Mail::send('emails.send', [ 
@@ -67,12 +68,34 @@ class EmailController extends Controller
         return response(null,500);
     }
 
-    public function showCoupon(){
-        $coupons = Coupon::where('participant_id', null)->paginate(100);
+    public function showCoupon($type = null){
+        
+        switch ($type) {
+            case 'regular':
+                $coupons = Coupon::where('participant_id', null)->where('type','Regular Coupon')->paginate(100);
+                break;
+
+            case 'student':
+                $coupons = Coupon::where('participant_id', null)->where('type','Student Coupon')->paginate(100);
+                break;
+            case null:
+                $coupons = Coupon::where('participant_id', null)->paginate(100);
+                break;
+            default:
+                abort(404);
+                break;
+        }
 
         return view('coupon',[
             'coupons' => $coupons
         ]);
 
+    }
+
+    public function participants(){
+        $participants = Participant::paginate(100);
+        return view('participants', [
+            'participants' => $participants
+        ]);
     }
 }

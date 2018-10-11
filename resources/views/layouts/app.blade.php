@@ -22,7 +22,7 @@
     <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tag.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
+    @stack('plugin')
 </head>
 <body>
     <div id="apps">
@@ -101,5 +101,6 @@
       @endif
     </script>
     @yield('add_js')
+
 </body>
 </html>
