@@ -32,7 +32,7 @@
                                         <td>{{$participant->email}}</td>
                                         <td>{{$participant->plan}}</td>
                                         <td>{{$participant->amount}}</td>
-                                        <td>{{$participant->coupon}}</td>
+                                        <td>{{$participant->coupon->coupon ?? 'No Coupon'}}</td>
                                     </tr>
                                 @empty
                                    
