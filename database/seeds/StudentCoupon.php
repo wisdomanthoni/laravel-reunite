@@ -11,7 +11,7 @@ class StudentCoupon extends Seeder
      */
     public function run()
     {
-        factory(App\Coupon::class, 5)->create(
+        factory(App\Coupon::class, 200)->create(
             [
                 'type' => 'Student Coupon'
             ]
