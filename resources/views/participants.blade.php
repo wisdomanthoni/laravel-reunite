@@ -27,6 +27,8 @@
                                         <td>Dakota Rice</td>
                                         <td>$36,738</td>
                                     </tr>
+                                    {{$participant}}
+                                    {{$participant->coupon}}
                                 @empty
                                    <tr>
                                     <td>No Participant </td> 
