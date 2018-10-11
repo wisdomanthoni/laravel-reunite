@@ -19,7 +19,6 @@ class EmailController extends Controller
         // return $request;
       // Logic will go here
         $id = $request->id;
-        $type = $request->type;
         $email = $request->email;
         
         $p = new Participant();
@@ -31,17 +30,19 @@ class EmailController extends Controller
         $p->amount = $request->amount;
         $p->photo = $request->photo;
         $p->username = $request->username;
-        $p->save();
-
         if (!empty($request->coupon)) {
             $c = Coupon::find($request->coupon);
             $c->participant_id = $p->id;
             $c->save();
             $type = $c->type;
             $p->plan = $type;
-            $p->save();
+        }else{
+            $type = $request->type;
+            $p->plan = $type;
         }
-        
+
+        $p->save();
+ 
         Mail::send('emails.send', [ 
                                    'type' => $type, 
                                    'id' => $id, 
