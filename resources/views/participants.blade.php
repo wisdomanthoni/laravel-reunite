@@ -17,22 +17,24 @@
                     <div class="content table-responsive table-full-width">
                         <table id="p-table" class="table table-sm table-striped">
                             <thead>
-                                <th>Competition</th>
-                                <th>Home</th>
+                                 <th>ID</th>
+                                 <th>Name</th>
+                                 <th>Email</th>
+                                 <th>Plan</th>
+                                 <th>Amount</th>
+                                 <th>Coupon</th>
                             </thead>
                             <tbody>
                                 @forelse ($participants as $participant)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Dakota Rice</td>
-                                        <td>$36,738</td>
+                                        <td>{{$participant->firstname}} {{$participant->lastname}}</td>
+                                        <td>{{$participant->email}}</td>
+                                        <td>{{$participant->plan}}</td>
+                                        <td>{{$participant->amount}}</td>
+                                        <td>{{$participant->coupon}}</td>
                                     </tr>
-                                    {{$participant}}
-                                    {{$participant->coupon}}
                                 @empty
-                                   <tr>
-                                    <td>No Participant </td> 
-                                   </tr>
+                                   
                                 @endforelse
                                 
                             </tbody>
@@ -52,11 +54,17 @@
 
 @push('plugin')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script>
-    $(document).ready( function () {
-        $('#p-table').DataTable();
-    } );
-</script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap.min.css"> --}}
+   
 @endpush
+
+@section('add_js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/dataTables.bootstrap.min.js"></script> --}}
+    <script>
+        $(document).ready( function () {
+            $('#p-table').DataTable();
+        } );
+   </script>
+@endsection
