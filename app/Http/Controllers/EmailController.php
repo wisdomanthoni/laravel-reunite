@@ -38,6 +38,8 @@ class EmailController extends Controller
             $c->participant_id = $p->id;
             $c->save();
             $type = $c->type;
+            $p->plan = $type;
+            $p->save();
         }
         
         Mail::send('emails.send', [ 
