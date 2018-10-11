@@ -8,7 +8,7 @@ class Participant extends Model
 {
     public function coupon()
     {
-        return $this->has(Coupon::class);
+        return $this->hasOne(Coupon::class);
     }
     
 }
