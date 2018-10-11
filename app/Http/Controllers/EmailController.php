@@ -25,7 +25,6 @@ class EmailController extends Controller
         $p->firstname = $request->firstname;
         $p->lastname = $request->lastname;
         $p->email = $email;
-        $p->plan = $type;
         $p->ref = $id;
         $p->amount = $request->amount;
         $p->photo = $request->photo;
