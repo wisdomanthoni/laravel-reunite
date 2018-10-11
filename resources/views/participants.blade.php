@@ -27,6 +27,7 @@
                             <tbody>
                                 @forelse ($participants as $participant)
                                     <tr>
+                                        <td>{{{{$loop->index + 1}}}}</td>
                                         <td>{{$participant->firstname}} {{$participant->lastname}}</td>
                                         <td>{{$participant->email}}</td>
                                         <td>{{$participant->plan}}</td>
