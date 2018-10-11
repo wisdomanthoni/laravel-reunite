@@ -32,9 +32,9 @@ class EmailController extends Controller
         if (!empty($request->coupon)) {
             $c = Coupon::find($request->coupon);
             $c->participant_id = $p->id;
-            $c->save();
             $type = $c->type;
             $p->plan = $type;
+            $c->save();
         }else{
             $type = $request->type;
             $p->plan = $type;
