@@ -152,7 +152,7 @@ class FilmController extends Controller
            $pic = $request->file('pic');
            $extension = $request->file('pic')->getClientOriginalExtension();
            $filename  = 'film-photo-' . time() . '.' . $extension;
-           $picUrl = $pic->storeAs('/public/photos', $filename, 'public');
+           $picUrl = $pic->storeAs('/players', $filename, 'public');
         }
 
         return '/'.$picUrl;
