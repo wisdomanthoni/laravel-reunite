@@ -84,6 +84,11 @@ class EmailController extends Controller
             case 'student':
                 $coupons = Coupon::where('participant_id', null)->where('type','Student Coupon')->paginate(100);
                 break;
+
+            case 'love':
+                $coupons = Coupon::where('participant_id', null)->where('type', 'I Love DevFestSS Coupon')->paginate(100);
+                break;
+
             case null:
                 $coupons = Coupon::where('participant_id', null)->paginate(100);
                 break;
